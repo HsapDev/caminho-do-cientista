@@ -1,3 +1,8 @@
+package dao;
+
+import conexao.Conexao;
+import model.Questoes;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,10 +62,10 @@ public class QuestoesDao {
 
     }
 
-    public void deletar (Questoes questao){
+    public void deletar (int id){
         String sql = "DELETE FROM questao WHERE id = ? ";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1,questao.getId());
+            ps.setInt(1,id);
             ps.executeUpdate();
 
         } catch (SQLException e) {

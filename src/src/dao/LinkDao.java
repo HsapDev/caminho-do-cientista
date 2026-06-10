@@ -1,3 +1,8 @@
+package dao;
+
+import conexao.Conexao;
+import model.Link;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +13,7 @@ import java.util.List;
 public class LinkDao {
 
     public void inserir(Link link){
-        String sql = "INSERT INTO Link (conteudo_id,titulo,url) VALUES (?,?,?)";
+        String sql = "INSERT INTO entities.Link (conteudo_id,titulo,url) VALUES (?,?,?)";
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,link.getConteudo_id());
             ps.setString(2,link.getTitulo());
@@ -20,7 +25,7 @@ public class LinkDao {
     }
 
     public List<Link> listar(){
-        String sql = "SELECT * FROM Link";
+        String sql = "SELECT * FROM entities.Link";
         List<Link> LinkList = new ArrayList<>();
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
@@ -40,7 +45,7 @@ public class LinkDao {
     }
 
     public void editar (Link link){
-        String sql = "UPDATE Link SET titulo = ?, url = ? WHERE id =?";
+        String sql = "UPDATE entities.Link SET titulo = ?, url = ? WHERE id =?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1,link.getTitulo());
             ps.setString(2, link.getUrl());
@@ -50,10 +55,10 @@ public class LinkDao {
         }
         catch (SQLException e){System.out.println("ERRO: "+e.getMessage());}
     }
-    public void excluir (Link Link){
-        String sql = "DELETE FROM Link WHERE id= ?";
+    public void excluir (int id){
+        String sql = "DELETE FROM entities.Link WHERE id= ?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt(1,Link.getId());
+            ps.setInt(1,id);
             ps.executeUpdate();
             System.out.println("link DELETADO");
         }

@@ -1,3 +1,5 @@
+package model;
+
 public class Conteudo {
     private int id;
     private int materiaId;

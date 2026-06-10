@@ -1,3 +1,8 @@
+package dao;
+import conexao.Conexao;
+
+import model.Conteudo;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +30,7 @@ public class ConteudoDao {
     public List<Conteudo> listar (){
         String sql = "SELECT * FROM CONTEUDO";
         List<Conteudo> conteudoList = new ArrayList<>();
-        try(Connection conn = Conexao.conectar();PreparedStatement ps = conn.prepareStatement(sql)){
+        try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
@@ -52,19 +57,19 @@ public class ConteudoDao {
             ps.setInt(4,conteudo.getId());
 
             ps.executeUpdate();
-            System.out.println("Conteudo atualizado! ");
+            System.out.println("entities.Conteudo atualizado! ");
         }
         catch (SQLException e ){
             System.out.println("ERRO: "+e.getMessage());
         }
     }
 
-    public void delete (Conteudo conteudo){
+    public void delete (int id){
         String sql = "DELETE FROM conteudo WHERE id = ? ";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt(1,conteudo.getId());
+            ps.setInt(1,id);
             ps.executeUpdate();
-            System.out.println("Conteudo Removido!");
+            System.out.println("entities.Conteudo Removido!");
         }
         catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
     }
