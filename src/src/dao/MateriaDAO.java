@@ -1,3 +1,6 @@
+package dao;
+import model.Materia;
+import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +18,7 @@ public class MateriaDAO {
             ps.setString(1, materia.getNome());
             ps.setString(2, materia.getDescricao());
             ps.executeUpdate();
-            System.out.println("Materia cadastrada");
+            System.out.println("entities.Materia cadastrada");
 
         }
         catch (SQLException e ){
@@ -28,7 +31,7 @@ public class MateriaDAO {
         List<Materia> lista = new ArrayList<>();
 
         try (Connection conn = Conexao.conectar();
-            PreparedStatement ps = conn.prepareStatement(sql);
+             PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()){
 
             while (rs.next()){
@@ -52,7 +55,7 @@ public class MateriaDAO {
             ps.setInt(3,materia.getId());
 
             ps.executeUpdate();
-            System.out.println("Materia atualizada! ");
+            System.out.println("entities.Materia atualizada! ");
         } catch (SQLException e){
             System.out.println("Erro ao digitar: "+e.getMessage());
         }
@@ -65,7 +68,7 @@ public class MateriaDAO {
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1,id);
             ps.executeUpdate();
-            System.out.println("Materia Removida!");
+            System.out.println("entities.Materia Removida!");
         } catch (SQLException e) {
             System.out.println("Erro ao excluir! "+ e.getMessage());
         }

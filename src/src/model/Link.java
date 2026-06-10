@@ -1,3 +1,5 @@
+package model;
+
 public class Link {
     private int id;
     private int conteudo_id;

@@ -1,4 +1,6 @@
-public class videos {
+package model;
+
+public class Videos {
     private int id;
     private int conteudo_id;
     private  String titulo;
@@ -36,8 +38,8 @@ public class videos {
     public void setUrl(String url) {
         this.url = url;
     }
-    public videos (){}
-    public videos (String titulo,String url){
+    public Videos(){}
+    public Videos(String titulo, String url){
         this.titulo= titulo;
         this.url=url;
     }
