@@ -1,6 +1,7 @@
-package service;
-import  model.Conteudo;
-import dao.ConteudoDao;
+package com.caminho.cientista.service;
+
+import com.caminho.cientista.dao.ConteudoDao;
+import com.caminho.cientista.model.Conteudo;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class ConteudoService {
         if (conteudo.getTexto()==null){throw  new IllegalArgumentException("ERRO: TEXTO NULO");}
         dao.inserir(conteudo);
     }
-    public List<Conteudo> listar (Conteudo conteudo){
+    public List<Conteudo> listar (){
         return dao.listar();
     }
     public void editar (Conteudo conteudo){

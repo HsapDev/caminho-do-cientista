@@ -1,7 +1,6 @@
-package service;
-
-import dao.MateriaDAO;
-import model.Materia;
+package com.caminho.cientista.service;
+import com.caminho.cientista.dao.MateriaDAO;
+import com.caminho.cientista.model.Materia;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class MateriaService {
         System.out.println("Materia registrada com segurança pelo service");
     }
 
-    public List<Materia> listar (Materia materia){
+    public List<Materia> listar (){
         return dao.listar();
     }
 

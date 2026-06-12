@@ -1,6 +1,6 @@
-package model;
+package com.caminho.cientista.model;
 
-public class Link {
+public class Videos {
     private int id;
     private int conteudo_id;
     private  String titulo;
@@ -38,8 +38,8 @@ public class Link {
     public void setUrl(String url) {
         this.url = url;
     }
-    public Link (){}
-    public Link (String titulo,String url){
+    public Videos(){}
+    public Videos(String titulo, String url){
         this.titulo= titulo;
         this.url=url;
     }

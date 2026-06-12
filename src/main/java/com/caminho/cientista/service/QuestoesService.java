@@ -1,8 +1,8 @@
-package service;
+package com.caminho.cientista.service;
 
-import dao.QuestoesDao;
-import model.Questoes;
 
+import com.caminho.cientista.model.Questoes;
+import com.caminho.cientista.dao.QuestoesDao;
 import java.util.List;
 
 public class QuestoesService {
@@ -16,7 +16,7 @@ public class QuestoesService {
         if (questoes.getResolucao()==null){throw new IllegalArgumentException("ERRO: RESOLUCAO NAO ENCONTRADA");}
         dao.inserir(questoes);
     }
-    public List<Questoes> listar (Questoes questoes){
+    public List<Questoes> listar (){
         return dao.listar();
     }
 

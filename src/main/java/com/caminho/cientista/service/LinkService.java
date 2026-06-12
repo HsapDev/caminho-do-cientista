@@ -1,8 +1,7 @@
-package service;
+package com.caminho.cientista.service;
 
-import dao.LinkDao;
-import model.Link;
-
+import com.caminho.cientista.dao.LinkDao;
+import com.caminho.cientista.model.Link;
 import java.util.List;
 
 public class LinkService {
@@ -17,7 +16,7 @@ public class LinkService {
         }
         dao.inserir(link);
     }
-    public List<Link> listar (Link link){
+    public List<Link> listar (){
         return dao.listar();
     }
     public void editar (Link link){

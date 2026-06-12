@@ -1,8 +1,7 @@
-package dao;
-import conexao.Conexao;
+package com.caminho.cientista.dao;
 
-import model.Conteudo;
-
+import com.caminho.cientista.conexao.Conexao;
+import com.caminho.cientista.model.Conteudo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package model;
+package com.caminho.cientista.model;
 
 public class Conteudo {
     private int id;

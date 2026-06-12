@@ -1,4 +1,4 @@
-package conexao;
+package com.caminho.cientista.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

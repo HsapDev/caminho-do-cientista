@@ -1,11 +1,11 @@
-package service;
+package com.caminho.cientista.service;
 
-import dao.VideosDao;
-import model.Videos;
+import com.caminho.cientista.dao.VideosDao;
+import com.caminho.cientista.model.Videos;
 
 import java.util.List;
 
-public class VideoService {
+public class VideosService {
     private VideosDao dao = new VideosDao();
 
     public void criar(Videos Videos){
@@ -17,7 +17,7 @@ public class VideoService {
         }
         dao.inserir(Videos);
     }
-    public List<Videos> listar (Videos Videos){
+    public List<Videos> listar (){
         return dao.listar();
     }
     public void editar (Videos Videos){
