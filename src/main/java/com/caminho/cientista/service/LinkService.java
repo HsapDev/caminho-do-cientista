@@ -2,8 +2,10 @@ package com.caminho.cientista.service;
 
 import com.caminho.cientista.dao.LinkDao;
 import com.caminho.cientista.model.Link;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class LinkService {
     private LinkDao dao = new LinkDao();
 

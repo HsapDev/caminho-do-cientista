@@ -1,9 +1,10 @@
 package com.caminho.cientista.service;
 import com.caminho.cientista.dao.MateriaDAO;
 import com.caminho.cientista.model.Materia;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MateriaService {
 
     private MateriaDAO dao = new MateriaDAO();

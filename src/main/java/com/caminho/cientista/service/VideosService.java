@@ -2,9 +2,10 @@ package com.caminho.cientista.service;
 
 import com.caminho.cientista.dao.VideosDao;
 import com.caminho.cientista.model.Videos;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class VideosService {
     private VideosDao dao = new VideosDao();
 

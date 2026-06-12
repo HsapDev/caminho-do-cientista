@@ -2,9 +2,10 @@ package com.caminho.cientista.service;
 
 import com.caminho.cientista.dao.ConteudoDao;
 import com.caminho.cientista.model.Conteudo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ConteudoService {
     private ConteudoDao dao = new ConteudoDao();
     public void criar (Conteudo conteudo){
@@ -15,6 +16,11 @@ public class ConteudoService {
     }
     public List<Conteudo> listar (){
         return dao.listar();
+    }
+
+    public Conteudo buscarPorId(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorId(id);
     }
     public void editar (Conteudo conteudo){
         if (conteudo.getMateriaId()<0){throw  new IllegalArgumentException("ERRO: ID MATERIA INEXISTENTE");}

@@ -1,5 +1,7 @@
 package com.caminho.cientista.model;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 public class Materia {
 
     private int id;

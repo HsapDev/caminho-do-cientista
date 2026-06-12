@@ -26,6 +26,28 @@ public class ConteudoDao {
         }
     }
 
+    public Conteudo buscarPorId(int id){
+        String sql ="SELECT * FROM conteudo WHERE id = ?";
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            Conteudo c = new Conteudo();
+            c.setId(rs.getInt("id"));
+            c.setMateriaId(rs.getInt("materia_id"));
+            c.setTitulo(rs.getString("titulo"));
+            c.setTexto(rs.getString("texto"));
+            c.setFormula((rs.getString("formula")));
+            return c;
+
+        }
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
     public List<Conteudo> listar (){
         String sql = "SELECT * FROM CONTEUDO";
         List<Conteudo> conteudoList = new ArrayList<>();

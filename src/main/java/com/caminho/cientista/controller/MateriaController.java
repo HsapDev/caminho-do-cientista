@@ -15,8 +15,8 @@ public class MateriaController {
 
     @Autowired
     private MateriaService service;
-    @Autowired
-    private Materia materia;
+
+    private Materia materia  = new Materia();
 
 
     @PostMapping

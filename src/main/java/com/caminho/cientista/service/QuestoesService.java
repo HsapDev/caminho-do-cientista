@@ -3,8 +3,10 @@ package com.caminho.cientista.service;
 
 import com.caminho.cientista.model.Questoes;
 import com.caminho.cientista.dao.QuestoesDao;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class QuestoesService {
 
     private QuestoesDao dao = new QuestoesDao();
