@@ -5,7 +5,7 @@ import model.Videos;
 
 import java.util.List;
 
-public class VideoService {
+public class VideosService {
     private VideosDao dao = new VideosDao();
 
     public void criar(Videos Videos){
@@ -17,7 +17,7 @@ public class VideoService {
         }
         dao.inserir(Videos);
     }
-    public List<Videos> listar (Videos Videos){
+    public List<Videos> listar (){
         return dao.listar();
     }
     public void editar (Videos Videos){

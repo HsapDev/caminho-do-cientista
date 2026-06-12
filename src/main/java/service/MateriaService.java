@@ -22,7 +22,7 @@ public class MateriaService {
         System.out.println("Materia registrada com segurança pelo service");
     }
 
-    public List<Materia> listar (Materia materia){
+    public List<Materia> listar (){
         return dao.listar();
     }
 
