@@ -12,7 +12,7 @@ public class ConteudoService {
         if (conteudo.getTexto()==null){throw  new IllegalArgumentException("ERRO: TEXTO NULO");}
         dao.inserir(conteudo);
     }
-    public List<Conteudo> listar (Conteudo conteudo){
+    public List<Conteudo> listar (){
         return dao.listar();
     }
     public void editar (Conteudo conteudo){

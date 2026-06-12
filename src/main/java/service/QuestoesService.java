@@ -16,7 +16,7 @@ public class QuestoesService {
         if (questoes.getResolucao()==null){throw new IllegalArgumentException("ERRO: RESOLUCAO NAO ENCONTRADA");}
         dao.inserir(questoes);
     }
-    public List<Questoes> listar (Questoes questoes){
+    public List<Questoes> listar (){
         return dao.listar();
     }
 

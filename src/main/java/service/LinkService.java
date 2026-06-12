@@ -17,7 +17,7 @@ public class LinkService {
         }
         dao.inserir(link);
     }
-    public List<Link> listar (Link link){
+    public List<Link> listar (){
         return dao.listar();
     }
     public void editar (Link link){
