@@ -1,6 +1,7 @@
 package com.caminho.cientista.dao;
 import com.caminho.cientista.conexao.Conexao;
 
+import com.caminho.cientista.model.Link;
 import com.caminho.cientista.model.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class MateriaDAO {
             ps.setString(1, materia.getNome());
             ps.setString(2, materia.getDescricao());
             ps.executeUpdate();
-            System.out.println("entities.Materia cadastrada");
+            System.out.println("Materia cadastrada");
 
         }
         catch (SQLException e ){
@@ -28,7 +29,7 @@ public class MateriaDAO {
     }
 
     public List<Materia> listar(){
-        String sql = "SELECT * FROM MATERIA";
+        String sql = "SELECT * FROM materia";
         List<Materia> lista = new ArrayList<>();
 
         try (Connection conn = Conexao.conectar();
@@ -47,6 +48,27 @@ public class MateriaDAO {
             System.out.println("Erro: "+e.getMessage());
         }
         return lista;
+    }
+
+    public Materia buscarPorId(int id){
+        String sql ="SELECT * FROM materia WHERE id = ?";
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Materia m = new Materia();
+                m.setId(rs.getInt("id"));
+                m.setNome(rs.getString("nome"));
+                m.setDescricao(rs.getString("descricao"));
+
+                return m;
+
+            }
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
     }
     public void editar (Materia materia){
         String sql = "UPDATE materia SET nome = ?, descricao = ? where id = ? ";

@@ -28,6 +28,12 @@ public class ConteudoController {
         return service.buscarPorId(id);
     }
 
+    @GetMapping("/por-materia/{idmateria}")
+    public List<Conteudo> getByMateriaId (@PathVariable int idmateria)
+    {
+        return service.buscarPorIdmateria(idmateria);
+    }
+
 
     @PutMapping
     public String put (@RequestBody Conteudo conteudo){

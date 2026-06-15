@@ -1,6 +1,7 @@
 package com.caminho.cientista.dao;
 import com.caminho.cientista.conexao.Conexao;
 
+import com.caminho.cientista.model.Link;
 import com.caminho.cientista.model.Questoes;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.List;
 public class QuestoesDao {
 
     public void inserir(Questoes questao){
-        String sql = "INSERT INTO  questoes (conteudo_id,enunciado,resolucao,resposta) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO  questao (conteudo_id,enunciado,resolucao,resposta) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,questao.getConteudoId());
@@ -26,7 +27,7 @@ public class QuestoesDao {
         }catch (SQLException e){System.out.println("ERRO: "+e.getMessage());}
     }
     public List<Questoes> listar (){
-        String sql = "Select * from questoes";
+        String sql = "Select * from questao";
         List<Questoes> questoesList = new ArrayList<>();
 
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
@@ -35,6 +36,7 @@ public class QuestoesDao {
             while (rs.next()){
                 Questoes q = new Questoes();
                 //logica eu peco da clase questao, e o resultSet pega do banco
+                q.setId(rs.getInt("id"));
                 q.setConteudoId(rs.getInt("conteudo_id"));
                 q.setEnunciado(rs.getString("enunciado"));
                 q.setResolucao(rs.getString("resolucao"));
@@ -45,6 +47,50 @@ public class QuestoesDao {
         catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
 
         return questoesList;
+    }
+
+    public Questoes buscarPorId(int id){
+        String sql ="SELECT * FROM questao WHERE id = ?";
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Questoes q = new Questoes();
+                q.setId(rs.getInt("id"));
+                q.setConteudoId(rs.getInt("conteudo_id"));
+                q.setEnunciado(rs.getString("enunciado"));
+                q.setResolucao(rs.getString("resolucao"));
+                q.setResposta(rs.getString("resposta"));
+                return q;
+
+            }
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
+    public List<Questoes> buscarPorQuestaoId(int id){
+        String sql ="SELECT * FROM questao WHERE conteudo_id = ?";
+        ArrayList<Questoes> questoes = new ArrayList<>();
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Questoes q = new Questoes();
+                //logica eu peco da clase questao, e o resultSet pega do banco
+                q.setId(rs.getInt("id"));
+                q.setConteudoId(rs.getInt("conteudo_id"));
+                q.setEnunciado(rs.getString("enunciado"));
+                q.setResolucao(rs.getString("resolucao"));
+                q.setResposta(rs.getString("resposta"));
+                questoes.add(q);
+            }
+        return questoes;
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
     }
 
     public void editar (Questoes questao){

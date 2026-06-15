@@ -51,4 +51,28 @@ a:hover{
     background-color: #2980b9;
     text-decoration: none;
 }
+#lista-materias {
+    list-style: none; /* Remove as bolinhas da lista */
+}
 
+#lista-materias li {
+    margin: 10px 0;
+    padding: 0;
+}
+
+#lista-materias a {
+    display: block;                /* O link ocupa a linha toda */
+    padding: 15px;                 /* Área de clique bem grande */
+    background-color: #f9f9f9;     /* Fundo para você ver o alvo */
+    border: 1px solid #ddd;        /* Borda para destacar */
+    border-radius: 5px;
+    color: #3498db;                /* Cor do texto */
+    text-decoration: none;         /* Sem sublinhado */
+    cursor: pointer;               /* Garante que o cursor vire a mãozinha */
+    transition: background 0.3s;
+}
+
+#lista-materias a:hover {
+    background-color: #eef6fc;     /* Efeito ao passar o mouse */
+    text-decoration: underline;
+}

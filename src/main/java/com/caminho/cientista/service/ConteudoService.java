@@ -22,6 +22,11 @@ public class ConteudoService {
         if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
         return dao.buscarPorId(id);
     }
+    public List<Conteudo> buscarPorIdmateria(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorIdmateria(id);
+    }
+
     public void editar (Conteudo conteudo){
         if (conteudo.getMateriaId()<0){throw  new IllegalArgumentException("ERRO: ID MATERIA INEXISTENTE");}
         dao.editar(conteudo);

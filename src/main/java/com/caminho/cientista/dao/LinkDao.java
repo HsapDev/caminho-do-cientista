@@ -2,6 +2,7 @@ package com.caminho.cientista.dao;
 
 import com.caminho.cientista.conexao.Conexao;
 import com.caminho.cientista.model.Link;
+import com.caminho.cientista.model.Videos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.util.List;
 public class LinkDao {
 
     public void inserir(Link link){
-        String sql = "INSERT INTO entities.Link (conteudo_id,titulo,url) VALUES (?,?,?)";
+        String sql = "INSERT INTO Link (conteudo_id,titulo,url) VALUES (?,?,?)";
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,link.getConteudo_id());
             ps.setString(2,link.getTitulo());
@@ -25,14 +26,15 @@ public class LinkDao {
     }
 
     public List<Link> listar(){
-        String sql = "SELECT * FROM entities.Link";
+        String sql = "SELECT * FROM link";
         List<Link> LinkList = new ArrayList<>();
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Link l = new Link();
+                l.setId(rs.getInt("id"));
                 l.setConteudo_id(rs.getInt("conteudo_id"));
-                l.setTitulo(rs.getString("titulo"));
+                l.setTitulo(rs.getString("nome"));
                 l.setUrl(rs.getString("url"));
                 LinkList.add(l);
             }
@@ -44,8 +46,49 @@ public class LinkDao {
         return LinkList;
     }
 
+    public Link buscarPorId(int id){
+        String sql ="SELECT * FROM link WHERE id = ?";
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Link l = new Link();
+                l.setId(rs.getInt("id"));
+                l.setConteudo_id(rs.getInt("conteudo_id"));
+                l.setTitulo(rs.getString("nome"));
+                l.setUrl(rs.getString("url"));
+                return l;
+
+            }
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
+    public List<Link> buscarPorConteudoId(int id){
+        String sql ="SELECT * FROM link WHERE conteudo_id = ?";
+        ArrayList<Link> links = new ArrayList<>();
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Link l = new Link();
+                l.setId(rs.getInt("id"));
+                l.setConteudo_id(rs.getInt("conteudo_id"));
+                l.setTitulo(rs.getString("nome"));
+                l.setUrl(rs.getString("url"));
+                links.add(l);}
+            return links;
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
+
     public void editar (Link link){
-        String sql = "UPDATE entities.Link SET titulo = ?, url = ? WHERE id =?";
+        String sql = "UPDATE Link SET titulo = ?, url = ? WHERE id =?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1,link.getTitulo());
             ps.setString(2, link.getUrl());
@@ -56,7 +99,7 @@ public class LinkDao {
         catch (SQLException e){System.out.println("ERRO: "+e.getMessage());}
     }
     public void excluir (int id){
-        String sql = "DELETE FROM entities.Link WHERE id= ?";
+        String sql = "DELETE FROM Link WHERE id= ?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,id);
             ps.executeUpdate();

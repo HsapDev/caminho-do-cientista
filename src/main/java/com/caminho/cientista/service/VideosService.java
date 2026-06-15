@@ -1,6 +1,7 @@
 package com.caminho.cientista.service;
 
 import com.caminho.cientista.dao.VideosDao;
+import com.caminho.cientista.model.Conteudo;
 import com.caminho.cientista.model.Videos;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,20 @@ public class VideosService {
     public List<Videos> listar (){
         return dao.listar();
     }
+
+    public Videos buscarPorId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("ERRO: ID NAO EXISTE");
+        }
+        return dao.buscarPorId(id);
+
+    }
+
+    public List<Videos> buscarPorConteudoId(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorConteudoId(id);
+    }
+
     public void editar (Videos Videos){
         if (Videos.getId()<0){throw new IllegalArgumentException("ERRO: ID NAO EXISTE");}
     }

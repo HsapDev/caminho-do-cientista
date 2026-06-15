@@ -1,6 +1,7 @@
 package com.caminho.cientista.dao;
 import com.caminho.cientista.conexao.Conexao;
 
+import com.caminho.cientista.model.Conteudo;
 import com.caminho.cientista.model.Videos;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.List;
 public class VideosDao {
 
     public void inserir(Videos video){
-        String sql = "INSERT INTO entities.videos (conteudo_id,titulo,url) VALUES (?,?,?)";
+        String sql = "INSERT INTO video (conteudo_id,titulo,url) VALUES (?,?,?)";
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,video.getConteudo_id());
             ps.setString(2,video.getTitulo());
@@ -25,7 +26,7 @@ public class VideosDao {
     }
 
     public List<Videos> listar(){
-        String sql = "SELECT * FROM entities.videos";
+        String sql = "SELECT * FROM video";
         List<Videos> videosList = new ArrayList<>();
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
@@ -43,9 +44,48 @@ public class VideosDao {
         }
         return videosList;
     }
+    public List<Videos> buscarPorConteudoId(int id){
+        String sql ="SELECT * FROM video WHERE conteudo_id = ?";
+        ArrayList<Videos> videos = new ArrayList<>();
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Videos v = new Videos();
+                v.setConteudo_id(rs.getInt("id"));
+                v.setConteudo_id(rs.getInt("conteudo_id"));
+                v.setTitulo(rs.getString("titulo"));
+                v.setUrl(rs.getString("url"));
+                videos.add(v);}
+            return videos;
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
+    public Videos buscarPorId(int id){
+        String sql ="SELECT * FROM video WHERE id = ?";
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Videos vs = new Videos();
+                vs.setId(rs.getInt("id"));
+                vs.setConteudo_id(rs.getInt("conteudo_id"));
+                vs.setTitulo(rs.getString("titulo"));
+                vs.setUrl(rs.getString("url"));
+                return vs;
+
+            }
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
 
     public void editar (Videos video){
-        String sql = "UPDATE entities.videos SET titulo = ?, url = ? WHERE id =?";
+        String sql = "UPDATE video SET titulo = ?, url = ? WHERE id =?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1,video.getTitulo());
             ps.setString(2, video.getUrl());
@@ -56,7 +96,7 @@ public class VideosDao {
         catch (SQLException e){System.out.println("ERRO: "+e.getMessage());}
     }
     public void excluir (int id){
-        String sql = "DELETE FROM entities.videos WHERE id= ?";
+        String sql = "DELETE FROM video WHERE id= ?";
         try(Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,id);
             ps.executeUpdate();

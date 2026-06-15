@@ -48,6 +48,29 @@ public class ConteudoDao {
         return null;
     }
 
+    public List<Conteudo> buscarPorIdmateria(int id){
+        String sql ="SELECT * FROM conteudo WHERE materia_id = ?";
+        ArrayList<Conteudo> conteudos = new ArrayList<>();
+
+        try (Connection con = Conexao.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Conteudo c = new Conteudo();
+                c.setId(rs.getInt("id"));
+                c.setMateriaId(rs.getInt("materia_id"));
+                c.setTitulo(rs.getString("Titulo"));
+                c.setTexto(rs.getString("Texto"));
+                c.setFormula(rs.getString("Formula"));
+                conteudos.add(c);
+            }
+            return conteudos;
+
+
+        }catch (SQLException e ){System.out.println("ERRO: "+e.getMessage());}
+        return null;
+    }
+
     public List<Conteudo> listar (){
         String sql = "SELECT * FROM CONTEUDO";
         List<Conteudo> conteudoList = new ArrayList<>();
@@ -56,7 +79,8 @@ public class ConteudoDao {
 
             while (rs.next()){
                 Conteudo c = new Conteudo();
-                c.setId(rs.getInt("materia_id"));
+                c.setId(rs.getInt("id"));
+                c.setMateriaId(rs.getInt("materia_id"));
                 c.setTitulo(rs.getString("Titulo"));
                 c.setTexto(rs.getString("Texto"));
                 c.setFormula(rs.getString("Formula"));

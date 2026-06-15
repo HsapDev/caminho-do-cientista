@@ -1,6 +1,7 @@
 package com.caminho.cientista.service;
 
 
+import com.caminho.cientista.model.Conteudo;
 import com.caminho.cientista.model.Questoes;
 import com.caminho.cientista.dao.QuestoesDao;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,19 @@ public class QuestoesService {
     public List<Questoes> listar (){
         return dao.listar();
     }
+
+    public Questoes buscarPorId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("ERRO: ID NAO EXISTE");
+        }
+        return dao.buscarPorId(id);
+
+    }
+    public List<Questoes> buscarPorConteudoId(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorQuestaoId(id);
+    }
+
 
     public void editar (Questoes questoes){
         if (questoes.getConteudoId()<0){throw new IllegalArgumentException("ERRO: ID DE QUESTAO NAO ENCONTRADO");}
