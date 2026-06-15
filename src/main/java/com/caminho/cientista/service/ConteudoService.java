@@ -1,0 +1,39 @@
+package com.caminho.cientista.service;
+
+import com.caminho.cientista.dao.ConteudoDao;
+import com.caminho.cientista.model.Conteudo;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public class ConteudoService {
+    private ConteudoDao dao = new ConteudoDao();
+    public void criar (Conteudo conteudo){
+        if (conteudo.getMateriaId()<0){throw  new IllegalArgumentException("ERRO: NAO TEM ID DE MATERIA");}// int nunca é nulo, entao tem que ser maior que zero
+        if (conteudo.getTitulo()==null){throw  new IllegalArgumentException("ERRO: TITULO NULO");}
+        if (conteudo.getTexto()==null){throw  new IllegalArgumentException("ERRO: TEXTO NULO");}
+        dao.inserir(conteudo);
+    }
+    public List<Conteudo> listar (){
+        return dao.listar();
+    }
+
+    public Conteudo buscarPorId(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorId(id);
+    }
+    public List<Conteudo> buscarPorIdmateria(int id){
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        return dao.buscarPorIdmateria(id);
+    }
+
+    public void editar (Conteudo conteudo){
+        if (conteudo.getMateriaId()<0){throw  new IllegalArgumentException("ERRO: ID MATERIA INEXISTENTE");}
+        dao.editar(conteudo);
+    }
+    public void deletar (int id) {
+        if (id<0){throw  new IllegalArgumentException("ERRO: ID NAO EXISTE");}
+        dao.delete(id);
+    }
+
+}
