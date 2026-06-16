@@ -1,0 +1,4 @@
+idMateria:14 |
+titulo: lei de ownnnnn | 
+texto: a lei de own aplica que temos relacoes entre tensao , corrente e resistencia |
+formula: v = r*i

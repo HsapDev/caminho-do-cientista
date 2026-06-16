@@ -13,10 +13,6 @@ public class LinkService {
     public void criar(Link link){
         if (link.getTitulo() == null){throw new IllegalArgumentException("ERRO: TITULO VAZIO");}
         if (link.getUrl()== null){throw new IllegalArgumentException("ERRO: LINK VAZIO");}
-        try {new java.net.URL(link.getUrl());
-        }catch (java.net.MalformedURLException e){
-            throw new IllegalArgumentException("ERRO: LINK NAO EXISTE");
-        }
         dao.inserir(link);
     }
     public List<Link> listar (){

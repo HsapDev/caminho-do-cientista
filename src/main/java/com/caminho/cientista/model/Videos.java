@@ -39,7 +39,8 @@ public class Videos {
         this.url = url;
     }
     public Videos(){}
-    public Videos(String titulo, String url){
+    public Videos(int conteudo_id, String titulo, String url){
+        this.conteudo_id = conteudo_id;
         this.titulo= titulo;
         this.url=url;
     }

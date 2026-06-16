@@ -51,7 +51,8 @@ public class Conteudo {
     }
 
     public Conteudo (){}
-    public Conteudo(String titulo, String texto, String formula){
+    public Conteudo(int materiaId,String titulo, String texto, String formula){
+        this.materiaId = materiaId;
         this.formula=formula;
         this.texto=texto;
         this.titulo=titulo;

@@ -13,10 +13,7 @@ public class VideosService {
     public void criar(Videos Videos){
         if (Videos.getTitulo() == null){throw new IllegalArgumentException("ERRO: TITULO VAZIO");}
         if (Videos.getUrl()== null){throw new IllegalArgumentException("ERRO: Videos VAZIO");}
-        try {new java.net.URL(Videos.getUrl());
-        }catch (java.net.MalformedURLException e){
-            throw new IllegalArgumentException("ERRO: Videos NAO EXISTE");
-        }
+
         dao.inserir(Videos);
     }
     public List<Videos> listar (){
