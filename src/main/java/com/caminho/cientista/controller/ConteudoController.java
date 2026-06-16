@@ -13,7 +13,7 @@ public class ConteudoController {
 
     @PostMapping
     public String post (@RequestBody Conteudo conteudo){
-        service.editar(conteudo);
+        service.criar(conteudo);
 
     return "Conteudo criado com sucesso";
     }

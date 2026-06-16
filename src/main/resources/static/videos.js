@@ -1,4 +1,3 @@
-// 1. Função que faz o trabalho sujo
 function carregarVideos() {
     const params = new URLSearchParams(window.location.search);
     const idConteudo = params.get('id');
@@ -8,8 +7,6 @@ function carregarVideos() {
         return;
     }
 
-    console.log("DEBUG: Buscando vídeos para o conteúdo:", idConteudo);
-
     fetch(`http://localhost:8080/video/por-conteudo/${idConteudo}`)
         .then(res => {
             if (!res.ok) throw new Error("Erro HTTP: " + res.status);
@@ -17,10 +14,7 @@ function carregarVideos() {
         })
         .then(listaVideos => {
             const container = document.getElementById('container-video');
-            if (!container) {
-                console.error("ERRO: Elemento 'container-videos' não encontrado no HTML!");
-                return;
-            }
+            if (!container) return;
             
             container.innerHTML = '';
             
@@ -29,16 +23,22 @@ function carregarVideos() {
                 return;
             }
 
+            // Criamos uma lista de cards simples para os vídeos
             listaVideos.forEach(v => {
-                container.innerHTML += `
-                    <div>
-                        <h3>${v.titulo}</h3>
-                        <iframe src="${v.url}" width="300" height="200"></iframe>
-                    </div>`;
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                
+                card.innerHTML = `
+                    <h3>${v.titulo}</h3>
+                    <a href="${v.url}" target="_blank" rel="noopener noreferrer" class="btn-assistir">
+                        Assistir Agora
+                    </a>
+                `;
+                
+                container.appendChild(card);
             });
         })
         .catch(err => console.error("Erro ao carregar vídeos:", err));
 }
 
-// 2. O gatilho: Só roda quando o HTML estiver pronto
-document.addEventListener('DOMContentLoaded', carregarVideos);
+carregarVideos();

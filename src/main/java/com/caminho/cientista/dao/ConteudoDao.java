@@ -14,6 +14,7 @@ public class ConteudoDao {
     public void inserir (Conteudo conteudo){
         String sql = "INSERT INTO conteudo (materia_id,titulo,texto,formula) VALUES (?,?,?,?)";
         try (Connection conn = Conexao.conectar(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setInt(1,conteudo.getMateriaId());
             ps.setString(2,conteudo.getTitulo());
             ps.setString(3,conteudo.getTexto());

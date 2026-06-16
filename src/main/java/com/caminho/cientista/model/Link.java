@@ -39,7 +39,8 @@ public class Link {
         this.url = url;
     }
     public Link (){}
-    public Link (String titulo,String url){
+    public Link (int conteudo_id,String titulo,String url){
+        this.conteudo_id=conteudo_id;
         this.titulo= titulo;
         this.url=url;
     }
